@@ -30,31 +30,33 @@ function View() {
 
     this.refresh = function(model) {
         // clean table
-        while(table.rows.length > 2){
-          table.deleteRow(2);
+        while (table.rows.length > 2) {
+            table.deleteRow(2);
         }
 
-        if(model.toFilter){
-          for(var i=0; i<model.filteredPlayers().length; i++){
-            filteredPlayers(model.filteredPlayers()[i], i);
-          }
+        console.log('model', model);
 
-          model.toFilter = false;
+
+        if (model.toFilter()) {
+            for (var i = 0; i < model.filteredPlayers().length; i++) {
+                insertPlayerRow(model.filteredPlayers()[i], i);
+            }
+
+            model.notToFilter();
 
         } else {
-          for(var i=0; i<model.allPlayers().length; i++){
-            insertPlayerRow(model.allPlayers()[i], i);
-          }
+            for (var i = 0; i < model.allPlayers().length; i++) {
+                insertPlayerRow(model.allPlayers()[i], i);
+            }
         }
 
         this.cleanInputboxes();
-
     }
 
-    this.cleanInputboxes = function(){
-              inputName.value = "";
-              inputAge.value = "";
-              inputNumber.value = "";
+    this.cleanInputboxes = function() {
+        inputName.value = "";
+        inputAge.value = "";
+        inputNumber.value = "";
     }
 
     this.control = function(controller) {
@@ -65,20 +67,15 @@ function View() {
         buttonFilter.onclick = controller.clickFilter;
     }
 
-    this.getSelectedIndex = function(){
+    this.getSelectedIndex = function() {
 
-      for(var i=2; i<table.rows.length; i++){
+        for (var i = 2; i < table.rows.length; i++) {
 
-        if(table.rows[i].cells[0].childNodes[0].checked){
-          return table.rows[i].cells[0].childNodes[0].value;
+            if (table.rows[i].cells[0].childNodes[0].checked) {
+                return table.rows[i].cells[0].childNodes[0].value;
+            }
         }
-      }
-
-      return -1;
-    }
-
-    this.displayFiltered = function(){
-      
+        return -1;
     }
 
     function insertPlayerRow(player, index) {

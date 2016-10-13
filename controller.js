@@ -33,12 +33,16 @@ function Controller(view, model) {
     }
 
     this.clickFilter = function() {
-      model.toFilter = true;
-      model.doFilter(inputName, inputAge, inputNumber, inputTeam);
+      model.pleaseFilter();
+     var filtered =  model.doFilter(view.getInputedName(), view.getInputedAge(), view.getInputedNumber(), view.getInputedTeam());
+      view.refresh(model);
     }
+
+
 
     this.clickReset = function() {
         view.cleanInputboxes();
+        view.refresh(model);
     }
 
     view.refresh(model);

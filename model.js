@@ -23,8 +23,16 @@ function Model() {
         return filtP;
     }
 
+    this.pleaseFilter = function(){
+      toFilter = true;
+    }
+
     this.toFilter = function() {
         return toFilter;
+    }
+
+    this.notToFilter = function(){
+        toFilter = false;
     }
 
     this.AddPlayer = function(na, ag, nb, tm) {
@@ -67,56 +75,108 @@ function Model() {
 
 
 
-    var filterByName = function(inputName) {
-        if (inputName == "") {
-            return filteredPlayers;
-        } else if (player.name == inputName) {
+    var filterByName = function(inputName, allData) {
+      var filteredP = [];
 
-            filteredPlayers.push(player);
+        for (var i=0; i < allData.length; i++) {
+            if (allData[i].name === inputName) {
+              filteredP.push(allData[i]);
+            }
+
         }
+
+        return filteredP;
     }
 
-    var filterByAge = function(inputAge) {
-        if (inputAge.value === "") {
-            return filteredPlayers;
-        } else if (player.age === inputAge.value) {
-            filteredPlayers.push(player);
+    var filterByAge = function(inputAge, allData) {
+        var filteredP = [];
+
+        for (var i = 0; i < allData.length; i++) {
+            if (allData[i].age == inputAge) {
+                filteredP.push(allData[i]);
+            }
         }
+        return filteredP;
     }
 
-    var filterByNumber = function(inputNumber) {
-        if (inputNumber.value === "") {
-            return filteredPlayers;
-        } else if (player.number === inputNumber.value) {
-            filteredPlayers.push(player);
+    var filterByNumber = function(inputNumber, allData) {
+        var filteredP = [];
+        for (var i = 0; i < allData.length; i++) {
+            if (allData[i].number == inputNumber) {
+                filteredP.push(allData[i]);
+            }
         }
+        return filteredP;
     }
 
-    var filterByTeam = function(inputTeam) {
-        if (inputTeam.value === "") {
-            return filteredPlayers;
-        } else if (player.team === inputTeam.value) {
-            filteredPlayers.push(player);
+    var filterByTeam = function(inputTeam, allData) {
+        var filteredP = [];
+        for (var i = 0; i < allData.length; i++) {
+            if (allData[i].team == inputTeam.text) {
+                filteredP.push(allData[i]);
+            }
         }
+        return filteredP;
     }
     this.doFilter = function(na, ag, nb, tm) {
         var query = Player(na, ag, nb, tm);
-        console.log('query: ', query);
-        filterByName();
+        // console.log('query: ', query);
+
+        filtP = allP;
+
+        if (query.name != '') {
+            filtP = filterByName(query.name, filtP);
+        }
+
+        console.log('filtered by name: ', filtP);
+
+        if (query.age != '') {
+            filtP = filterByAge(query.age, filtP);
+            console.log(inputAge.value);
+        }
+        console.log('filtered by age: ', filtP);
+
+
+        if (query.number != '') {
+            filtP = filterByNumber(query.number, filtP);
+        }
+        console.log('filtered by number: ', filtP);
+
+
+        console.log('query team: ', query.team);
+        if (query.team != 'No Team') {
+            filtP = filterByTeam(query.team, filtP);
+        }
+        console.log('filtered by team: ', filtP);
+
+        return filtP;
     }
 
     // FILL WITH DATA
-    var randomNr = function() {
-        return Math.floor((Math.random() * 10) + 1);
+    var randomNr = function(max) {
+        return Math.floor((Math.random() * max) + 1);
+    }
+
+    var randomAge = function() {
+        var age = 0;
+        while (age < 15) {
+            age = randomNr(50);
+        }
+        return age;
+    }
+
+    var teams = ["0", "Steaua", "Bucuresti", "Sector"];
+    var randomTeam = function() {
+        return teams[randomNr(3)];
     }
 
     var fillWithData = function() {
         var names = ["Ion", "Mihai", "Mircea", "Vasile", "George", "Andrei", "Lorena", "Bianca", "Soska", "Vlad", "Serge"];
-        var teams = ["Bars", "Mars", "Pluto", "Huiuto", "Pizda", "Pula", "Mos", "Craciun", "Blea", "Suka", "Nahui"];
+        var nrOfPlayers = 10;
 
-        for (var i = 0; i < 8; i++) {
-            var player = Player(names[randomNr()], randomNr(), randomNr(), {
-                text: teams[randomNr()]
+        for (var i = 0; i < nrOfPlayers; i++) {
+            var player = Player(names[randomNr(10)], randomAge(), randomNr(30), {
+                text: randomTeam()
             });
             allP.push(player);
         }
