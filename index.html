@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Assignment1</title>
+        <script src="model.js"></script>
+        <script src="view.js"></script>
+        <script src="controller.js"></script>
+
+    </head>
+    <body>
+        <h1 style="color:red;">Football Players</h1>
+        <table id="generalTable">
+            <tr>
+                <th></th>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Age
+                </th>
+                <th>
+                    Number
+                </th>
+                <th>
+                    Team
+                </th>
+                <th></th>
+            </tr>
+            <tr>
+                <td>
+                    <button type="button" name="button" id="buttonEdit" onclick="clickEdit()">EDIT</button>
+                    <button type="button" name="buttonDelete" id="buttonDelete">DELETE</button>
+                </td>
+                <td>
+                    <input type="text" name="name" id="inputName">
+                </td>
+                <td>
+                    <input type="text" name="age" id="inputAge">
+                </td>
+                <td>
+                    <input type="text" name="number" id="inputNumber">
+                </td>
+                <td>
+                    <select id="inputTeam" name="team">
+                      <option value="noTeam">No Team</option>
+                      <option value="steaua">Steaua</option>
+                      <option value="bucharest">Bucharest</option>
+                      <option value="Sector">Sector</option>
+                    </select>
+
+                </td>
+                <td>
+                    <button type="button" name="button" id="buttonAdd">Add</button>
+                    <button type="button" name="button" id="buttonFilter">Filter</button>
+                    <button type="button" name="button" id="buttonReset">Reset</button </td>
+                </tr>
+            </table>
+        </body>
+        <script >
+            var model = new Model();
+            var view = new View();
+            var controller = new Controller(view, model);
+            view.control(controller);
+        </script>
+
+    </html>
