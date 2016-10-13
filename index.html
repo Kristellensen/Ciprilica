@@ -6,12 +6,13 @@
         <script src="model.js"></script>
         <script src="view.js"></script>
         <script src="controller.js"></script>
-
+        <script src="graph.js"></script>
     </head>
+
     <body>
-        <h1 style="color:red;">Football Players</h1>
+        <h1 style="color:red;">Football Team Players (with graph by age group)</h1>
         <table id="generalTable">
-            <tr>
+            <tr id="rowLabels">
                 <th></th>
                 <th>
                     Name
@@ -27,7 +28,7 @@
                 </th>
                 <th></th>
             </tr>
-            <tr>
+            <tr id="rowInputs">
                 <td>
                     <button type="button" name="button" id="buttonEdit" onclick="clickEdit()">EDIT</button>
                     <button type="button" name="buttonDelete" id="buttonDelete">DELETE</button>
@@ -47,6 +48,7 @@
                       <option value="steaua">Steaua</option>
                       <option value="bucharest">Bucharest</option>
                       <option value="Sector">Sector</option>
+
                     </select>
 
                 </td>
@@ -56,6 +58,24 @@
                     <button type="button" name="button" id="buttonReset">Reset</button </td>
                 </tr>
             </table>
+
+            <svg id="graph"></svg>
+            <svg id="colors"></svg>
+
+            <style>
+                #colors {
+                    position:absolute;
+                    right:20px;
+                    top  :40px;
+                    background-color: lightgray;
+                }
+                #graph {
+                    position:absolute;
+                    right:20px;
+                    top  :90px;
+                }
+            </style>
+
         </body>
         <script >
             var model = new Model();

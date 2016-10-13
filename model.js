@@ -23,15 +23,15 @@ function Model() {
         return filtP;
     }
 
-    this.pleaseFilter = function(){
-      toFilter = true;
+    this.pleaseFilter = function() {
+        toFilter = true;
     }
 
     this.toFilter = function() {
         return toFilter;
     }
 
-    this.notToFilter = function(){
+    this.notToFilter = function() {
         toFilter = false;
     }
 
@@ -41,6 +41,13 @@ function Model() {
     }
     this.DeleteOnIndex = function(index) {
         allP.splice(index, 1);
+    }
+    this.EditAPlayer = function(na, ag, nb, tm, index) {
+        var editedPlayer = Player(na, ag, nb, tm);
+        allP[index] = editedPlayer;
+    }
+    this.getPlayer = function(selected) {
+        return allP[selected];
     }
 
     this.ValidatePlayer = function(na, ag, nb, tm) {
@@ -76,11 +83,11 @@ function Model() {
 
 
     var filterByName = function(inputName, allData) {
-      var filteredP = [];
+        var filteredP = [];
 
-        for (var i=0; i < allData.length; i++) {
+        for (var i = 0; i < allData.length; i++) {
             if (allData[i].name === inputName) {
-              filteredP.push(allData[i]);
+                filteredP.push(allData[i]);
             }
 
         }
@@ -112,7 +119,8 @@ function Model() {
     var filterByTeam = function(inputTeam, allData) {
         var filteredP = [];
         for (var i = 0; i < allData.length; i++) {
-            if (allData[i].team == inputTeam.text) {
+          console.log('filter team, if: ' + allData[i].team + ' == ', inputTeam);
+            if (allData[i].team == inputTeam) {
                 filteredP.push(allData[i]);
             }
         }
@@ -142,7 +150,6 @@ function Model() {
         }
         console.log('filtered by number: ', filtP);
 
-
         console.log('query team: ', query.team);
         if (query.team != 'No Team') {
             filtP = filterByTeam(query.team, filtP);
@@ -165,14 +172,14 @@ function Model() {
         return age;
     }
 
-    var teams = ["0", "Steaua", "Bucuresti", "Sector"];
+    var teams = ["No Team", "Steaua", "Bucharest", "Sector"];
     var randomTeam = function() {
         return teams[randomNr(3)];
     }
 
     var fillWithData = function() {
         var names = ["Ion", "Mihai", "Mircea", "Vasile", "George", "Andrei", "Lorena", "Bianca", "Soska", "Vlad", "Serge"];
-        var nrOfPlayers = 10;
+        var nrOfPlayers = 100;
 
         for (var i = 0; i < nrOfPlayers; i++) {
             var player = Player(names[randomNr(10)], randomAge(), randomNr(30), {
