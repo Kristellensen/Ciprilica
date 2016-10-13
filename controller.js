@@ -13,7 +13,10 @@ function Controller(view, model) {
         } else {
             alert(validationMessage);
         }
+
+        showGraph(model.allPlayers());
     };
+
     this.clickEdit = function() {
 
 
@@ -39,6 +42,8 @@ function Controller(view, model) {
         } else {
             alert("Please select a player to edit");
         }
+
+        showGraph(model.allPlayers());
     };
 
 
@@ -51,6 +56,7 @@ function Controller(view, model) {
 
         view.refresh(model);
         buttonEdit.innerHTML = "EDIT";
+        showGraph(model.allPlayers());
 
     };
 

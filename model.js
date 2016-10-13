@@ -179,7 +179,7 @@ function Model() {
 
     var fillWithData = function() {
         var names = ["Ion", "Mihai", "Mircea", "Vasile", "George", "Andrei", "Lorena", "Bianca", "Soska", "Vlad", "Serge"];
-        var nrOfPlayers = 100;
+        var nrOfPlayers = 5;
 
         for (var i = 0; i < nrOfPlayers; i++) {
             var player = Player(names[randomNr(10)], randomAge(), randomNr(30), {
